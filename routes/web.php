@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\MenagereController;
-use App\Http\Controllers\ContratController
-;
+use App\Http\Controllers\ContratController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -10,8 +10,12 @@ Route::get('/', function () {
 
 Route::get('/layouts/app',[MenagereController::class, 'app']);
 
-Route::get('/auth/login', [MenagereController::class,'login'])->name("login");
-Route::get('/auth/logout', [MenagereController::class,'logout'])->name("logout");
+// Routes d'authentification
+Route::get('/auth/login', [AuthController::class,'login'])->name("login");
+Route::post('/auth/login', [AuthController::class,'authenticate']);
+Route::get('/auth/register',[AuthController::class,'register'])->name('register');
+Route::post('auth/register',[AuthController::class,'store'])->name('store');
+Route::get('/auth/logout', [AuthController::class,'logout'])->name("logout");
 
 
 
